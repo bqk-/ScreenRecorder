@@ -29,7 +29,7 @@ namespace ScreenRecorder
         static void Main(string[] args)
         {
             Console.WriteLine("Initiate Login");
-            
+            Console.ReadLine();
             var identity = new Identity();
             var user = identity.SignIn().GetAwaiter().GetResult();
 

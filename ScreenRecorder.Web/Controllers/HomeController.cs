@@ -65,7 +65,7 @@ namespace ScreenRecorder.Web.Controllers
         public IActionResult ForceProcess(string name)
         {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.Uri = new Uri("amqp://cbis:cbrabbitpass@rabbitmq.test.app.citybreak.com:5672/cbis.mq.citybreak.com");
+            factory.Uri = new Uri(Configuration.GetValue<string>("RabbitMQ"));
 
             IConnection conn = factory.CreateConnection();
             IModel channel = conn.CreateModel();
