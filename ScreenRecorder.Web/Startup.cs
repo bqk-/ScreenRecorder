@@ -46,11 +46,11 @@ namespace ScreenRecorder.Web
             })
                 .AddOpenIdConnect("oidc", options =>
                 {
-                    options.Authority = "http://localhost:51816/";
+                    options.Authority = Configuration.GetValue<string>("SSO");
                     options.RequireHttpsMetadata = false;
 
-                    options.ClientSecret = "196cb64e-437f-4ef8-a595-4fba12462e64";
-                    options.ClientId = "ScreenRecorder";
+                    options.ClientSecret = Configuration.GetValue<string>("SSO.Secret");
+                    options.ClientId = Configuration.GetValue<string>("SSO.Client");
 
                     options.ResponseType = "code id_token";
 
