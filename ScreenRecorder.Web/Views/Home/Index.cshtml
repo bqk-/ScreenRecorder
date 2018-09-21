@@ -1,0 +1,46 @@
+﻿@using Microsoft.WindowsAzure.Storage.Blob;
+@model List<CloudBlockBlob>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<h2>Your files</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blob in Model)
+        {
+            <tr>
+                <th scope="row">
+                    @if (blob.Name.EndsWith(".avi"))
+                    {
+                        @blob.Name
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("ViewFile", new { name = blob.Name })">@blob.Name</a>
+                    }
+                </th>
+                <th scope="row">@blob.Properties.Created</th>
+                <th scope="row">
+                    @if (blob.Name.EndsWith(".avi"))
+                    {
+                        <a href="@Url.Action("ForceProcess", new { name = blob.Name })"><span class="label label-warning">Processing</span></a>
+                    }
+                    else
+                    {
+                        <span class="label label-success">Ready</span>
+                    }
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

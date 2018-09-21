@@ -1,0 +1,22 @@
+﻿@using Microsoft.WindowsAzure.Storage.Blob;
+@model CloudBlockBlob
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a href="@Url.Action("Index")">Back to list</a>
+
+<h2>View @Model.Name</h2>
+
+@if (Model.Name.EndsWith(".avi"))
+{
+    <p>File is not done processing</p>
+}
+else
+{
+    <video style="width:100%;height:auto" controls>
+        <source src="@Url.Action("StreamFile", new { name = Model.Name })" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+}
