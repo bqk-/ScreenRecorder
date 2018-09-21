@@ -50,7 +50,7 @@ namespace ScreenRecorder.Web.Controllers
             return View(list.OrderByDescending(x => x.Properties.Created).ToList());
         }
         
-        public async Task<IActionResult> ViewFile(string name)
+        public IActionResult ViewFile(string name)
         {
             var azure = CloudStorageAccount.Parse(Configuration.GetValue<string>("Storage"));
 
