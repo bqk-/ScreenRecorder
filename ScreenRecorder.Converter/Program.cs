@@ -46,7 +46,7 @@ namespace ScreenRecorder.Converter
 
                 var blobClient = azure.CreateCloudBlobClient();
                 var container = blobClient.GetContainerReference(message.Container);
-
+                await container.CreateIfNotExistsAsync();
                 var reference = container.GetBlockBlobReference(message.FileName);
                 await reference.DownloadToFileAsync(message.FileName, FileMode.OpenOrCreate);
 

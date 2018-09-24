@@ -19,9 +19,12 @@ namespace ScreenRecorder
         private static int ScreenHeight = Screen.PrimaryScreen.Bounds.Height;
         public ManualResetEvent WaitHandler = new ManualResetEvent(false);
 
+        private string _tempName;
+
         public void Record()
         {
-            var writer = new AviWriter("temp.avi")
+            _tempName = "Temp-" + DateTime.Now.Ticks + ".avi";
+            var writer = new AviWriter(_tempName)
             {
                 FramesPerSecond = 30,
             };
@@ -78,7 +81,7 @@ namespace ScreenRecorder
         public string SaveFile()
         {
             var newName = "Recording-" + DateTime.Now.Ticks + ".avi";
-            File.Move("temp.avi", newName);
+            File.Move(_tempName, newName);
             return newName;
         }
     }
